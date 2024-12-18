@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+    {% block body %}
+    
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card mt-5">
+                        <div class="card-header bg-primary text-white text-center">
+                            <h3>Kidney Disease Prediction</h3>
+                        </div>
+                        <div class="card-body">
+                            <!-- Kidney Disease Prediction Form -->
+                            <form action="/kidney" method="POST">
+                                <div class="form-group">
+                                    <label for="age">Age (1 - 120 years)</label>
+                                    <input type="number" class="form-control" id="age" name="age" required placeholder="Enter age (e.g., 45)" value="45" min="1" max="120">
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="bp">Blood Pressure (e.g., 80 - 180 mmHg)</label>
+                                    <input type="number" class="form-control" id="bp" name="bp" required placeholder="Enter blood pressure (e.g., 120)" value="120" min="80" max="180">
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="sg">Specific Gravity (e.g., 1.005 - 1.030)</label>
+                                    <input type="number" class="form-control" id="sg" name="sg" required placeholder="Enter specific gravity (e.g., 1.010)" value="1.010" step="any" min="1.005" max="1.030">
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="al">Albumin (e.g., 0 - 5 g/dL)</label>
+                                    <input type="number" class="form-control" id="al" name="al" required placeholder="Enter albumin level (e.g., 2.5)" value="2.5" step="any" min="0" max="5">
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="su">Sugar (e.g., 0 - 5 g/dL)</label>
+                                    <input type="number" class="form-control" id="su" name="su" required placeholder="Enter sugar level (e.g., 0)" value="0" step="any" min="0" max="5">
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="bgr">Blood Glucose Level (e.g., 60 - 250 mg/dL)</label>
+                                    <input type="number" class="form-control" id="bgr" name="bgr" required placeholder="Enter blood glucose level (e.g., 100)" value="100" step="any" min="60" max="250">
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="bu">Blood Urea (e.g., 10 - 50 mg/dL)</label>
+                                    <input type="number" class="form-control" id="bu" name="bu" required placeholder="Enter blood urea level (e.g., 30)" value="30" step="any" min="10" max="50">
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="sc">Serum Creatinine (e.g., 0.5 - 2.5 mg/dL)</label>
+                                    <input type="number" class="form-control" id="sc" name="sc" required placeholder="Enter serum creatinine level (e.g., 1.0)" value="1.0" step="any" min="0.5" max="2.5">
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="sod">Sodium (e.g., 130 - 150 mEq/L)</label>
+                                    <input type="number" class="form-control" id="sod" name="sod" required placeholder="Enter sodium level (e.g., 140)" value="140" step="any" min="130" max="150">
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="pot">Potassium (e.g., 3.5 - 5.0 mEq/L)</label>
+                                    <input type="number" class="form-control" id="pot" name="pot" required placeholder="Enter potassium level (e.g., 4.0)" value="4.0" step="any" min="3.5" max="5.0">
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="hemo">Hemoglobin (e.g., 10 - 18 g/dL)</label>
+                                    <input type="number" class="form-control" id="hemo" name="hemo" required placeholder="Enter hemoglobin level (e.g., 14)" value="14" step="any" min="10" max="18">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pcv_n">Packed Cell Volume (e.g., 20 - 45%)</label>
+                                    <input type="number" class="form-control" id="pcv_n" name="pcv_n" required placeholder="Enter packed cell volume" value="40" min="20" max="45">
+                                </div>
+                                <div class="form-group">
+                                    <label for="wc_n">White Blood Cells Count (e.g., 4,000 - 11,000 cells/µL)</label>
+                                    <input type="number" class="form-control" id="wc_n" name="wc_n" required placeholder="Enter white blood cells count" value="7000" min="4000" max="11000">
+                                </div>
+                                <div class="form-group">
+                                    <label for="rc_n">Red Blood Cells Count (after treatment) (e.g., 3.5 - 6 million cells/µL)</label>
+                                    <input type="number" class="form-control" id="rc_n" name="rc_n" required placeholder="Enter red blood cells count after treatment" value="4" min="3" max="6">
+                                </div>
+                                <!-- <div class="form-group">
+                                    <label for="rc_n">Red Blood Cells Count (after treatment) (e.g., 3.5 - 6 million cells/µL)</label>
+                                    <input type="number" class="form-control" id="rc_n" name="rc_n" required placeholder="Enter red blood cells count after treatment" value="4" min="3" max="6">
+                                </div> -->
+                                
+                                                                
+    
+                                <div class="form-group">
+                                    <label for="rbc_n">Red Blood Cells Count</label>
+                                    <select class="form-control" id="rbc_n" name="rbc_n" required>
+                                        <option value="1" selected>Normal</option>
+                                        <option value="0">Abnormal</option>
+                                    </select>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="pc_n">Pus Cell</label>
+                                    <select class="form-control" id="pc_n" name="pc_n" required>
+                                        <option value="1" selected>Normal</option>
+                                        <option value="0">Abnormal</option>
+                                    </select>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="pcc_n">Pus Cell Clumps</label>
+                                    <select class="form-control" id="pcc_n" name="pcc_n" required>
+                                        <option value="1" selected>Normal</option>
+                                        <option value="0">Abnormal</option>
+                                    </select>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="ba_n">Bacteria</label>
+                                    <select class="form-control" id="ba_n" name="ba_n" required>
+                                        <option value="1" selected>Normal</option>
+                                        <option value="0">Abnormal</option>
+                                    </select>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="htn_n">Hypertension</label>
+                                    <select class="form-control" id="htn_n" name="htn_n" required>
+                                        <option value="1">Yes</option>
+                                        <option value="0" selected>No</option>
+                                    </select>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="dm_n">Diabetes Mellitus</label>
+                                    <select class="form-control" id="dm_n" name="dm_n" required>
+                                        <option value="1">Yes</option>
+                                        <option value="0" selected>No</option>
+                                    </select>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="cad_n">Coronary Artery Disease</label>
+                                    <select class="form-control" id="cad_n" name="cad_n" required>
+                                        <option value="1">Yes</option>
+                                        <option value="0" selected>No</option>
+                                    </select>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="appet_n">Appetite</label>
+                                    <select class="form-control" id="appet_n" name="appet_n" required>
+                                        <option value="1">Good</option>
+                                        <option value="0" selected>Poor</option>
+                                    </select>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="pe_n">Pedal Edema</label>
+                                    <select class="form-control" id="pe_n" name="pe_n" required>
+                                        <option value="1">Yes</option>
+                                        <option value="0" selected>No</option>
+                                    </select>
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="ane_n">Anemia</label>
+                                    <select class="form-control" id="ane_n" name="ane_n" required>
+                                        <option value="1">Yes</option>
+                                        <option value="0" selected>No</option>
+                                    </select>
+                                </div>
+    
+                                <button type="submit" class="btn btn-primary btn-block">Predict Kidney Disease</button>
+                            </form>
+                        </div>
+    
+                        <!-- Prediction Result -->
+                        {% if prediction_result %}
+                        <div class="card-footer text-center mt-4">
+                            <h5 class="text-success">{{ prediction_result }}</h5>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    
+  
+    
+
+    
+{% endblock %}
+  

@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mt-5">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h3>Stroke Prediction</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Prediction Form -->
+                        <form action="/stroke2" method="POST">
+                            <div class="form-group">
+                                <label for="PATIENT_ID">Patient ID</label>
+                                <input type="number" class="form-control" id="PATIENT_ID" name="PATIENT_ID" value="30041536" required placeholder="Enter a unique patient ID">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="VISIT_ID">Visit ID</label>
+                                <input type="number" step="any" class="form-control" id="VISIT_ID" name="VISIT_ID" value="792138227" required placeholder="Enter the visit ID (e.g., 1.0)">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="CLINIC_CODE">Clinic Code</label>
+                                <input type="number" step="any" class="form-control" id="CLINIC_CODE" name="CLINIC_CODE" value="438" required placeholder="Enter clinic code (e.g., 2)">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="RACE">Race (Select one)</label>
+                                <select class="form-control" id="RACE" name="RACE" required>
+                                    <option value="0">Other</option>
+                                    <option value="1">Asian</option>
+                                    <option value="2">Black</option>
+                                    <option value="3">Hispanic</option>
+                                    <option value="4">White</option>
+                                </select>
+                            </div>
+
+                            <!-- Discharge Type Dropdown -->
+                            <div class="form-group">
+                                <label for="DISCHARGE_TYPE">Discharge Type</label>
+                                <select class="form-control" id="DISCHARGE_TYPE" name="DISCHARGE_TYPE" required>
+                                    <option value="6">Routine</option>
+                                    <option value="1">Discharge (routine)</option>
+                                    <option value="5">Left Against Medical Advice</option>
+                                    <option value="3">Expired</option>
+                                    <option value="4">Expired (Deceased)</option>
+                                    <option value="2">Discharged to Skilled Nursing Facility</option>
+                                    <option value="0">Routine</option>
+                                </select>
+                            </div>
+
+                            <!-- Facility Dropdown -->
+                            <div class="form-group">
+                                <label for="FACILITY">Facility</label>
+                                <select class="form-control" id="FACILITY" name="FACILITY" required>
+                                    <option value="0">H + H Facility</option>
+                                </select>
+                            </div>
+
+                            <!-- Visit Status Dropdown -->
+                            <div class="form-group">
+                                <label for="VISIT_STATUS">Visit Status</label>
+                                <select class="form-control" id="VISIT_STATUS" name="VISIT_STATUS" required>
+                                    <option value="0">Closed Discharged</option>
+                                    <option value="1">Discharged</option>
+                                </select>
+                            </div>
+
+                            <!-- Gender Dropdown -->
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select class="form-control" id="gender" name="gender" required>
+                                    <option value="1">Male</option>
+                                    <option value="0">Female</option>
+                                </select>
+                            </div>
+
+                            <!-- Age Input -->
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" class="form-control" id="age" name="age" required placeholder="Enter age (e.g., 45)" min="1">
+                            </div>
+
+                            <!-- Hypertension Dropdown -->
+                            <div class="form-group">
+                                <label for="hypertension">Hypertension</label>
+                                <select class="form-control" id="hypertension" name="hypertension" required>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+
+                            <!-- Heart Disease Dropdown -->
+                            <div class="form-group">
+                                <label for="heart_disease">Heart Disease</label>
+                                <select class="form-control" id="heart_disease" name="heart_disease" required>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+
+                            <!-- Ever Married Dropdown -->
+                            <div class="form-group">
+                                <label for="ever_married">Ever Married</label>
+                                <select class="form-control" id="ever_married" name="ever_married" required>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+
+                            <!-- Average Glucose Level Input -->
+                            <div class="form-group">
+                                <label for="avg_glucose_level">Average Glucose Level</label>
+                                <input type="number" step="any" class="form-control" id="avg_glucose_level" name="avg_glucose_level" required placeholder="Enter average glucose level (e.g., 85.0)">
+                            </div>
+
+                            <!-- BMI Input -->
+                            <div class="form-group">
+                                <label for="bmi">BMI (Body Mass Index)</label>
+                                <input type="number" step="any" class="form-control" id="bmi" name="bmi" required placeholder="Enter BMI (e.g., 25.0)">
+                            </div>
+
+                            <!-- Smoking Status Dropdown -->
+                            <div class="form-group">
+                                <label for="smoking_status">Smoking Status</label>
+                                <select class="form-control" id="smoking_status" name="smoking_status" required>
+                                    <option value="0">Never Smoked</option>
+                                    <option value="1">Formerly Smoked</option>
+                                    <option value="2">Smokes</option>
+                                </select>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-primary btn-block">Predict Stroke Risk</button>
+                        </form>
+                    </div>
+
+                    <!-- Prediction Result -->
+                    {% if prediction_result %}
+                    <div class="card-footer text-center mt-4">
+                        <h5 class="text-success">{{ prediction_result }}</h5>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

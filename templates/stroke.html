@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mt-5">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h3>Heart(stroke) Disease Prediction</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Heart Disease Prediction Form -->
+                        <form action="/stroke" method="POST">
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" class="form-control" id="age" name="age" required placeholder="Enter age" min="1" max="120">
+                            </div>
+                            <div class="form-group">
+                                <label for="hypertension">Hypertension </label>
+                                <select class="form-control" id="hypertension" name="hypertension" required>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="heart_disease">Heart Disease </label>
+                                <select class="form-control" id="heart_disease" name="heart_disease" required>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="avg_glucose_level">Average Glucose Level</label>
+                                <input type="number" class="form-control" id="avg_glucose_level" name="avg_glucose_level" required placeholder="Enter glucose level" step="any">
+                            </div>
+                            <div class="form-group">
+                                <label for="bmi">BMI</label><small class="text-muted">(Body mass index)</small></label>
+                                <input type="number" class="form-control" id="bmi" name="bmi" required placeholder="Enter BMI" step="any">
+                                 <!-- Button to open the BMI calculator modal -->
+                                 <button type="button" class="btn btn-info mt-2" data-toggle="modal" data-target="#bmiModal">Check BMI</button>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender_n">Gender </label>
+                                <select class="form-control" id="gender_n" name="gender_n" required>
+                                    <option value="1">Male</option>
+                                    <option value="0">Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="work_type_n">Work Type </label>
+                                <select class="form-control" id="work_type_n" name="work_type_n" required>
+                                    <option value="2">Private</option>
+                                    <option value="3">Self-employed</option>
+                                    <option value="0">Govt-job</option>
+                                    <option value="4">children</option>
+                                    <option value="1">Never_worked</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="ever_married_n">Ever Married </label>
+                                <select class="form-control" id="ever_married_n" name="ever_married_n" required>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="smoking_status_n">Smoking Status</label>
+                                <select class="form-control" id="smoking_status_n" name="smoking_status_n" required>
+                                    <option value="1">formerly smoked</option>
+                                    <option value="2">never smoked</option>
+                                    <option value="3">smokes</option>
+                                    <option value="0">Unknown</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="residence_type_n">Residence Type </label>
+                                <select class="form-control" id="Residence_type_n" name="Residence_type_n" required>
+                                    <option value="1">Urban</option>
+                                    <option value="0">Rural</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Predict Heart Disease</button>
+                        </form>
+                    </div>
+
+                    <!-- Prediction Result -->
+                    {% if prediction_result %}
+                    <div class="card-footer text-center mt-4">
+                        <h5 class="text-success">{{ prediction_result }}</h5>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BMI Calculation Modal -->
+    <div class="modal fade" id="bmiModal" tabindex="-1" role="dialog" aria-labelledby="bmiModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bmiModalLabel">BMI Calculator</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="bmiForm">
+                        <div class="form-group">
+                            <label for="weight">Weight (kg)</label>
+                            <input type="number" class="form-control" id="weight" required placeholder="Enter weight (kg)" min="1" max="500">
+                        </div>
+                        <div class="form-group">
+                            <label for="height">Height (cm)</label>
+                            <input type="number" class="form-control" id="height" required placeholder="Enter height (cm)" min="50" max="250">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="calculateBMI()">Calculate BMI</button>
+                    </form>
+                    <div id="bmiResult" class="mt-3" style="display:none;">
+                        <h5>BMI: <span id="calculatedBMI"></span></h5>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="fillBMI()">Fill BMI</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        function calculateBMI() {
+            // Get the weight and height values
+            var weight = parseFloat(document.getElementById("weight").value);
+            var height = parseFloat(document.getElementById("height").value) / 100; // Convert cm to meters
+
+            if (isNaN(weight) || isNaN(height) || height <= 0 || weight <= 0) {
+                alert("Please enter valid weight and height.");
+                return;
+            }
+
+            // BMI Calculation: BMI = weight (kg) / (height (m) ^ 2)
+            var bmi = weight / (height * height);
+            document.getElementById("calculatedBMI").textContent = bmi.toFixed(2);
+
+            // Show the result
+            document.getElementById("bmiResult").style.display = "block";
+        }
+
+        function fillBMI() {
+            var bmi = document.getElementById("calculatedBMI").textContent;
+            document.getElementById("bmi").value = bmi;
+            $('#bmiModal').modal('hide'); // Close the modal
+        }
+    </script>
+
+
+
+    {% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mt-5">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h3>Heart Disease Prediction</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Heart Disease Prediction Form -->
+                        <form action="/heart" method="POST">
+                            <div class="form-group">
+                                <label for="age">Age (1 - 120 years)</label>
+                                <input type="number" class="form-control" id="age" name="age" required placeholder="Enter age (e.g., 45)" value="45" min="1" max="120">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="sex">Sex </label>
+                                <!-- <input type="number" class="form-control" id="sex" name="sex" required placeholder="Enter sex (1 for Male, 0 for Female)" value="1" min="0" max="1"> -->
+                                <select class="form-control" id="sex" name="sex" required>
+                                    <option value="1">Male </option>
+                                    <option value="0">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cp">Chest Pain Type </label>
+                                <select class="form-control" id="cp" name="cp" required>
+                                    <option value="0">0 - Typical Angina</option>
+                                    <option value="1">1 - Atypical Angina</option>
+                                    <option value="2">2 - Non-anginal Pain</option>
+                                    <option value="3">3 - Asymptomatic</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="trestbps">Resting Blood Pressure (mmHg)</label>
+                                <input type="number" class="form-control" id="trestbps" name="trestbps" required placeholder="Enter resting blood pressure (e.g., 120)" value="120" min="80" max="200">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="chol">Serum Cholesterol (mg/dl)</label>
+                                <input type="number" class="form-control" id="chol" name="chol" required placeholder="Enter serum cholesterol level" value="220" min="100" max="600">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fbs">Fasting Blood Sugar (>120 mg/dl)</label>
+                                <select class="form-control" id="fbs" name="fbs" required>
+                                    <option value="1">Yes</option>
+                                    <option value="0" selected>No</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="restecg">Resting Electrocardiographic Results (0 - 2)</label>
+                                <input type="number" class="form-control" id="restecg" name="restecg" required placeholder="Enter resting electrocardiographic results (0-2)" value="0" min="0" max="2">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="thalach">Max Heart Rate Achieved</label>
+                                <input type="number" class="form-control" id="thalach" name="thalach" required placeholder="Enter max heart rate achieved" value="150" min="60" max="200">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exang">Exercise Induced Angina </label>
+                                <select class="form-control" id="exang" name="exang" required>
+                                    <option value="1">Yes</option>
+                                    <option value="0" selected>No</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="oldpeak">Depression Induced by Exercise Relative to Rest</label>
+                                <input type="number" class="form-control" id="oldpeak" name="oldpeak" required placeholder="Enter old peak value" value="0.5" step="any">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="slope">Slope of Peak Exercise ST Segment (0 - 2)</label>
+                                <input type="number" class="form-control" id="slope" name="slope" required placeholder="Enter slope of peak exercise ST segment" value="1" min="0" max="2">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ca">Number of Major Vessels Colored by Fluoroscopy (0 - 4)</label>
+                                <input type="number" class="form-control" id="ca" name="ca" required placeholder="Enter number of major vessels" value="0" min="0" max="4">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="thal">Thalassemia </label>
+                                <select class="form-control" id="thal" name="thal" required>
+                                    <option value="1">Normal</option>
+                                    <option value="2">Fixed Defect</option>
+                                    <option value="3">Reversable Defect</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">Predict Heart Disease</button>
+                        </form>
+                    </div>
+
+                    <!-- Prediction Result -->
+                    {% if prediction_result %}
+                    <div class="card-footer text-center mt-4">
+                        <h5 class="text-success">{{ prediction_result }}</h5>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+{% endblock %}

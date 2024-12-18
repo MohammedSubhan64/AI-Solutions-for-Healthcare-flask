@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block body %}
+    
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3>About AI Healthcare Solutions</h3>
+                </div>
+                <div class="card-body">
+                    <h4>AI in Healthcare: Revolutionizing Disease Prediction</h4>
+                    <p>AI Healthcare Solutions uses advanced machine learning algorithms to predict and diagnose various diseases based on patient data. These models analyze key medical factors to assess the likelihood of diseases and assist healthcare providers in offering preventive care. Below are the AI-powered prediction models:</p>
+                    
+                    <h5>1. Heart Disease Prediction</h5>
+                    <p>AI predicts heart disease based on factors like cholesterol levels, blood pressure, age, and lifestyle choices. Common tests: ECG, lipid panel, stress test, and blood pressure monitoring.</p>
+                    
+                    <h5>2. Stroke Prediction</h5>
+                    <p>The model predicts stroke risk by analyzing hypertension, heart disease, and blood sugar levels. Common tests: CT or MRI scans, blood clotting tests, and carotid ultrasound.</p>
+                    
+                    <h5>3. Diabetes Prediction</h5>
+                    <p>AI predicts diabetes risk by examining glucose levels, age, BMI, and family history. Common tests: fasting blood glucose, HbA1c test, and oral glucose tolerance test (OGTT).</p>
+                    
+                    <h5>4. Breast Cancer Risk Prediction</h5>
+                    <p>AI predicts breast cancer risk based on family history, age, and breast tissue density. Common tests: mammogram, breast ultrasound, and BRCA genetic testing.</p>
+                    
+                    <h5>5. Kidney Disease Prediction</h5>
+                    <p>The model analyzes factors like blood pressure, diabetes, and age to predict kidney disease. Common tests: creatinine test, GFR, and urine albumin-to-creatinine ratio (ACR).</p>
+
+                    <h5>6. Liver Disease Prediction</h5>
+                    <p>AI predicts liver disease risk by evaluating liver enzymes and lifestyle factors. Common tests: liver function tests (LFTs), ultrasound, and hepatitis screenings.</p>
+
+                    <h5>AI Model Input Fields</h5>
+                    <p>For accurate predictions, AI requires patient information such as:</p>
+                    <ul>
+                        <li><strong>Age, Gender</strong> (for all models)</li>
+                        <li><strong>Blood Pressure, Cholesterol, Blood Glucose</strong> (for heart disease, stroke, diabetes)</li>
+                        <li><strong>BMI, Smoking Status</strong> (for heart disease, stroke, diabetes)</li>
+                        <li><strong>Family History, Lifestyle Factors</strong> (for cancer and genetic predispositions)</li>
+                    </ul>
+
+                    <h5>How the AI Model Works</h5>
+                    <p>AI models analyze large datasets from patient tests and identify patterns to predict disease risks. These predictions assist healthcare professionals in making early and informed decisions, though they should be used alongside clinical judgment.</p>
+
+                    <h6>Common Risk Factors</h6>
+                    <p>Risk factors for these diseases often include:</p>
+                    <ul>
+                        <li>Age, gender, family history</li>
+                        <li>Lifestyle factors: smoking, diet, exercise</li>
+                        <li>Existing health conditions: hypertension, diabetes</li>
+                    </ul>
+
+                    <div class="text-center mt-4">
+                        <img src="{{ url_for('static', filename='health_care.png') }}" alt="AI in Healthcare" class="img-fluid">
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="/" class="btn btn-primary">Back to Prediction</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    {% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mt-5">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h3>Liver Disease Prediction</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Liver Disease Prediction Form -->
+                        <form action="/liver" method="POST">
+                            <div class="form-group">
+                                <label for="age">Age </label>
+                                <input type="number" class="form-control" id="age" name="age" required placeholder="Enter age (e.g., 45)" value="45" min="1" max="120">
+                                <small class="form-text text-muted">Reference Range: 1 to 120 years</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="gender_n">Gender </label>
+                                <select class="form-control" id="gender_n" name="gender_n" required>
+                                    <option value="1" selected>Male</option>
+                                    <option value="0">Female</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="total_bilirubin">Total Bilirubin (mg/dL)</label>
+                                <input type="number" step="any" class="form-control" id="total_bilirubin" name="total_bilirubin" required value="1.0">
+                                <small class="form-text text-muted">Reference Range: 0.2 - 1.2 mg/dL</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="direct_bilirubin">Direct Bilirubin (mg/dL)</label>
+                                <input type="number" step="any" class="form-control" id="direct_bilirubin" name="direct_bilirubin" required value="0.3">
+                                <small class="form-text text-muted">Reference Range: 0.1 - 0.4 mg/dL</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="alkaline_phosphatase">Alkaline Phosphatase (IU/L)</label>
+                                <input type="number" class="form-control" id="alkaline_phosphatase" name="alkaline_phosphatase" required value="90">
+                                <small class="form-text text-muted">Reference Range: 45 - 115 IU/L</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="alamine_aminotransferase">Alamine Aminotransferase (IU/L)</label>
+                                <input type="number" class="form-control" id="alamine_aminotransferase" name="alamine_aminotransferase" required value="50">
+                                <small class="form-text text-muted">Reference Range: 10 - 40 IU/L</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="aspartate_aminotransferase">Aspartate Aminotransferase (IU/L)</label>
+                                <input type="number" class="form-control" id="aspartate_aminotransferase" name="aspartate_aminotransferase" required value="40">
+                                <small class="form-text text-muted">Reference Range: 15 - 40 IU/L</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="total_proteins">Total Proteins (g/dL)</label>
+                                <input type="number" step="any" class="form-control" id="total_proteins" name="total_proteins" required value="6.5">
+                                <small class="form-text text-muted">Reference Range: 6.0 - 8.3 g/dL</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="albumin">Albumin (g/dL)</label>
+                                <input type="number" step="any" class="form-control" id="albumin" name="albumin" required value="4.0">
+                                <small class="form-text text-muted">Reference Range: 3.5 - 5.0 g/dL</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="albumin_globulin_ratio">Albumin and Globulin Ratio</label>
+                                <input type="number" step="any" class="form-control" id="albumin_globulin_ratio" name="albumin_globulin_ratio" required value="1.0">
+                                <small class="form-text text-muted">Reference Range: 1.1 - 2.5</small>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-primary btn-block">Predict Liver Disease</button>
+                        </form>
+                    </div>
+
+                    <!-- Prediction Result -->
+                    {% if prediction_result %}
+                    <div class="card-footer text-center mt-4">
+                        <h5 class="text-success">{{ prediction_result }}</h5>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    {% endblock %}

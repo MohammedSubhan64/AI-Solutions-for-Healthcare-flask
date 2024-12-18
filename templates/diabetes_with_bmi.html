@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mt-5">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h3>Diabetes Prediction</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Diabetes Prediction Form -->
+                        <form action="/diabetes" method="POST">
+                            <div class="form-group">
+                                <label for="pregnancies">Pregnancies <small class="text-muted">(Number of pregnancies)</small></label>
+                                <input type="number" class="form-control" id="pregnancies" name="pregnancies" required placeholder="Enter number of pregnancies" min="0" value="3">
+                            </div>
+                            <div class="form-group">
+                                <label for="glucose">Glucose <small class="text-muted">(Plasma glucose concentration)</small></label>
+                                <input type="number" class="form-control" id="glucose" name="glucose" required placeholder="Enter glucose level (e.g., 120)" min="0" value="120">
+                            </div>
+                            <div class="form-group">
+                                <label for="blood_pressure">Blood Pressure <small class="text-muted">(Diastolic blood pressure in mm Hg)</small></label>
+                                <input type="number" class="form-control" id="blood_pressure" name="blood_pressure" required placeholder="Enter blood pressure (e.g., 70)" min="0" value="70">
+                            </div>
+                            <div class="form-group">
+                                <label for="skin_thickness">Skin Thickness <small class="text-muted">(Skinfold thickness in mm)</small></label>
+                                <input type="number" class="form-control" id="skin_thickness" name="skin_thickness" required placeholder="Enter skin thickness (e.g., 20)" min="0" value="20">
+                            </div>
+                            <div class="form-group">
+                                <label for="insulin">Insulin <small class="text-muted">(2-Hour serum insulin in µU/ml)</small></label>
+                                <input type="number" class="form-control" id="insulin" name="insulin" required placeholder="Enter insulin level (e.g., 80)" min="0" value="80">
+                            </div>
+                            <div class="form-group">
+                                <label for="bmi">BMI <small class="text-muted">(Body mass index)</small></label>
+                                <input type="number" class="form-control" id="bmi" name="bmi" required placeholder="Enter BMI (e.g., 25)" step="any" min="10" max="50" value="25">
+                                <!-- Button to open the BMI calculator modal -->
+                                <button type="button" class="btn btn-info mt-2" data-toggle="modal" data-target="#bmiModal">Check BMI</button>
+                            </div>
+                            <div class="form-group">
+                                <label for="diabetes_pedigree_function">Diabetes Pedigree Function <small class="text-muted">(Diabetes pedigree function)</small></label>
+                                <input type="number" class="form-control" id="diabetes_pedigree_function" name="diabetes_pedigree_function" required placeholder="Enter diabetes pedigree function (e.g., 0.5)" step="any" value="0.5">
+                            </div>
+                            <div class="form-group">
+                                <label for="age">Age <small class="text-muted">(Age in years)</small></label>
+                                <input type="number" class="form-control" id="age" name="age" required placeholder="Enter age (e.g., 45)" min="1" max="120" value="45">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Predict Diabetes</button>
+                        </form>
+                    </div>
+
+                    <!-- Prediction Result -->
+                    {% if prediction_result %}
+                    <div class="card-footer text-center mt-4">
+                        <h5 class="text-success">{{ prediction_result }}</h5>
+                    </div>
+                    {% endif %}
+
+                    <!-- Error Message -->
+                    {% if error_message %}
+                    <div class="card-footer text-center mt-4">
+                        <h5 class="text-danger">{{ error_message }}</h5>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BMI Calculation Modal -->
+    <div class="modal fade" id="bmiModal" tabindex="-1" role="dialog" aria-labelledby="bmiModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bmiModalLabel">BMI Calculator</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="bmiForm">
+                        <div class="form-group">
+                            <label for="weight">Weight (kg)</label>
+                            <input type="number" class="form-control" id="weight" required placeholder="Enter weight (kg)" min="1" max="500">
+                        </div>
+                        <div class="form-group">
+                            <label for="height">Height (cm)</label>
+                            <input type="number" class="form-control" id="height" required placeholder="Enter height (cm)" min="50" max="250">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="calculateBMI()">Calculate BMI</button>
+                    </form>
+                    <div id="bmiResult" class="mt-3" style="display:none;">
+                        <h5>BMI: <span id="calculatedBMI"></span></h5>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="fillBMI()">Fill BMI</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script> -->
+    <script>
+        function calculateBMI() {
+            // Get the weight and height values
+            var weight = parseFloat(document.getElementById("weight").value);
+            var height = parseFloat(document.getElementById("height").value) / 100; // Convert cm to meters
+
+            if (isNaN(weight) || isNaN(height) || height <= 0 || weight <= 0) {
+                alert("Please enter valid weight and height.");
+                return;
+            }
+
+            // BMI Calculation: BMI = weight (kg) / (height (m) ^ 2)
+            var bmi = weight / (height * height);
+            document.getElementById("calculatedBMI").textContent = bmi.toFixed(2);
+
+            // Show the result
+            document.getElementById("bmiResult").style.display = "block";
+        }
+
+        function fillBMI() {
+            var bmi = document.getElementById("calculatedBMI").textContent;
+            document.getElementById("bmi").value = bmi;
+            $('#bmiModal').modal('hide'); // Close the modal
+        }
+    </script>
+
+
+{% endblock %}

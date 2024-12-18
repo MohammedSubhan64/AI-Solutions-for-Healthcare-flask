@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<style>
+   
+    .hero {
+        background: #0056b3;
+        color: white;
+        padding: 50px 0;
+        text-align: center;
+    }
+    .hero h1 {
+        font-size: 3rem;
+    }
+    .service-card {
+        margin-bottom: 30px;
+    }
+    .service-card h3 {
+        font-size: 1.5rem;
+    }
+    .service-image {
+        width: 100%;  /* Ensures image takes full width of card */
+        height: 200px; /* Set a fixed height for consistency */
+        object-fit: cover; /* Ensures image covers the box without distortion */
+    }
+</style>
+{% endblock %}
+    
+
+
+   {% block body %}
+    
+
+    <!-- Hero Section -->
+    <div class="hero mt-5">
+        <h1>AI-Powered Healthcare Solutions</h1>
+        <p>Revolutionizing healthcare with accurate predictions for heart disease, stroke, diabetes, kidney, and liver conditions</p>
+        <a href="#services" class="btn btn-light btn-lg mt-3">Explore Our Solutions</a>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" class="container my-5">
+        <h2 class="text-center mb-4">About Our AI Healthcare Solutions</h2>
+        <p class="lead text-center">We provide AI-powered tools designed to predict and diagnose critical health conditions, enabling earlier intervention and better patient outcomes. Our advanced algorithms assist healthcare providers in predicting heart disease, strokes, diabetes, kidney diseases, and liver complications with unparalleled accuracy.</p>
+    </div>
+
+    <!-- Services Section -->
+    <div id="services" class="container my-5">
+        <h2 class="text-center mb-4">Our AI Solutions</h2>
+        <div class="row">
+            <!-- Heart Disease Prediction -->
+            <div class="col-md-4 service-card">
+                <div class="card">
+                    <img src="{{url_for('static',filename='heart_img2.jpg')}}" alt="Heart Disease Prediction" class="service-image card-img-top">
+                    <div class="card-body">
+                        <h3 class="card-title">Heart Disease Prediction</h3>
+                        <p class="card-text">Our AI model analyzes patient data to predict the risk of heart disease with high accuracy, helping healthcare providers to take timely action.</p>
+                        <a href="/heart" class="btn btn-primary">Take Test</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stroke Prediction -->
+            <div class="col-md-4 service-card">
+                <div class="card">
+                    <img src="{{url_for('static',filename='stroke_img2.jpg')}}" alt="Stroke Prediction" class="service-image card-img-top">
+                    <div class="card-body">
+                        <h3 class="card-title">Stroke Prediction</h3>
+                        <p class="card-text">Using a combination of patient history and real-time data, our AI solution predicts the likelihood of a stroke, enabling preventive care.</p>
+                        <a href="/stroke" class="btn btn-primary">Take Test</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diabetes Prediction -->
+            <div class="col-md-4 service-card">
+                <div class="card">
+                    <img src="{{url_for('static',filename='diabetes_img1.jpg')}}" alt="Diabetes Prediction" class="service-image card-img-top">
+                    <div class="card-body">
+                        <h3 class="card-title">Diabetes Prediction</h3>
+                        <p class="card-text">Our AI tools help predict the onset of diabetes, providing early intervention opportunities to manage blood sugar levels and prevent complications.</p>
+                        <a href="/diabetes" class="btn btn-primary">Take Test</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kidney Disease Prediction -->
+            <div class="col-md-4 service-card">
+                <div class="card">
+                    <img src="{{url_for('static',filename='kidney_img1.jpg')}}" alt="Kidney Disease Prediction" class="service-image card-img-top">
+                    <div class="card-body">
+                        <h3 class="card-title">Kidney Disease Prediction</h3>
+                        <p class="card-text">Our AI-powered predictions assess kidney function and can predict kidney failure before critical damage occurs, improving patient outcomes.</p>
+                        <a href="/kidney" class="btn btn-primary">Take Test</a>
+                    </div>
+                </div>
+            </div>
+
+              <!-- Breast Disease Prediction -->
+              <div class="col-md-4 service-card">
+                <div class="card">
+                    <img src="{{url_for('static',filename='breast_img2.jpg')}}" alt="Breast Disease Prediction" class="service-image card-img-top">
+                    <div class="card-body">
+                        <h3 class="card-title">Breast Disease Prediction</h3>
+                        <p class="card-text">Our AI-powered predictions assess Breast function and can predict Breast cancer before critical damage occurs, improving patient outcomes.</p>
+                        <a href="/breast" class="btn btn-primary">Take Test</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Liver Disease Prediction -->
+            <div class="col-md-4 service-card">
+                <div class="card">
+                    <img src="{{url_for('static',filename='liver_img1.jpg')}}" alt="Liver Disease Prediction" class="service-image card-img-top">
+                    <div class="card-body">
+                        <h3 class="card-title">Liver Disease Prediction</h3>
+                        <p class="card-text">Our AI solutions can detect early signs of liver disease, providing valuable insights to prevent liver failure and reduce complications.</p>
+                        <a href="/liver" class="btn btn-primary">Take Test</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div id="contact" class="container my-5">
+        <h2 class="text-center mb-4">Contact Us</h2>
+        <p class="lead text-center">If you have any questions or would like to schedule a consultation, get in touch with us.</p>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Email</h4>
+                <p>mohdsubhan2764@gmail.com</p>
+            </div>
+            <div class="col-md-6">
+                <h4>Phone</h4>
+                <p>+91 7660916064</p>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+

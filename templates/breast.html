@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mt-5">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h3>Breast Cancer Prediction</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Prediction Form -->
+                        <form action="/breast" method="POST">
+
+                            <!-- Input fields for all the features -->
+                            <div class="form-group">
+                                <label for="radius_mean">Radius Mean</label>
+                                <input type="number" step="any" class="form-control" id="radius_mean" name="radius_mean" required placeholder="Enter radius mean (e.g., 15.78)" value="15.78">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="texture_mean">Texture Mean</label>
+                                <input type="number" step="any" class="form-control" id="texture_mean" name="texture_mean" required placeholder="Enter texture mean (e.g., 19.28)" value="19.28">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="perimeter_mean">Perimeter Mean</label>
+                                <input type="number" step="any" class="form-control" id="perimeter_mean" name="perimeter_mean" required placeholder="Enter perimeter mean (e.g., 85.03)" value="85.03">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="area_mean">Area Mean</label>
+                                <input type="number" step="any" class="form-control" id="area_mean" name="area_mean" required placeholder="Enter area mean (e.g., 560.99)" value="560.99">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="smoothness_mean">Smoothness Mean</label>
+                                <input type="number" step="any" class="form-control" id="smoothness_mean" name="smoothness_mean" required placeholder="Enter smoothness mean (e.g., 0.089)" value="0.089">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="compactness_mean">Compactness Mean</label>
+                                <input type="number" step="any" class="form-control" id="compactness_mean" name="compactness_mean" required placeholder="Enter compactness mean (e.g., 0.089)" value="0.089">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="concavity_mean">Concavity Mean</label>
+                                <input type="number" step="any" class="form-control" id="concavity_mean" name="concavity_mean" required placeholder="Enter concavity mean (e.g., 0.12)" value="0.12">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="concave_points_mean">Concave Points Mean</label>
+                                <input type="number" step="any" class="form-control" id="concave_points_mean" name="concave_points_mean" required placeholder="Enter concave points mean (e.g., 0.052)" value="0.052">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="symmetry_mean">Symmetry Mean</label>
+                                <input type="number" step="any" class="form-control" id="symmetry_mean" name="symmetry_mean" required placeholder="Enter symmetry mean (e.g., 0.182)" value="0.182">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fractal_dimension_mean">Fractal Dimension Mean</label>
+                                <input type="number" step="any" class="form-control" id="fractal_dimension_mean" name="fractal_dimension_mean" required placeholder="Enter fractal dimension mean (e.g., 0.062)" value="0.062">
+                            </div>
+
+                            <!-- SE fields -->
+                            <div class="form-group">
+                                <label for="radius_se">Radius SE</label>
+                                <input type="number" step="any" class="form-control" id="radius_se" name="radius_se" required placeholder="Enter radius SE (e.g., 0.284)" value="0.284">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="texture_se">Texture SE</label>
+                                <input type="number" step="any" class="form-control" id="texture_se" name="texture_se" required placeholder="Enter texture SE (e.g., 0.52)" value="0.52">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="perimeter_se">Perimeter SE</label>
+                                <input type="number" step="any" class="form-control" id="perimeter_se" name="perimeter_se" required placeholder="Enter perimeter SE (e.g., 1.5)" value="1.5">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="area_se">Area SE</label>
+                                <input type="number" step="any" class="form-control" id="area_se" name="area_se" required placeholder="Enter area SE (e.g., 141.5)" value="141.5">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="smoothness_se">Smoothness SE</label>
+                                <input type="number" step="any" class="form-control" id="smoothness_se" name="smoothness_se" required placeholder="Enter smoothness SE (e.g., 0.006)" value="0.006">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="compactness_se">Compactness SE</label>
+                                <input type="number" step="any" class="form-control" id="compactness_se" name="compactness_se" required placeholder="Enter compactness SE (e.g., 0.02)" value="0.02">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="concavity_se">Concavity SE</label>
+                                <input type="number" step="any" class="form-control" id="concavity_se" name="concavity_se" required placeholder="Enter concavity SE (e.g., 0.022)" value="0.022">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="concave_points_se">Concave Points SE</label>
+                                <input type="number" step="any" class="form-control" id="concave_points_se" name="concave_points_se" required placeholder="Enter concave points SE (e.g., 0.007)" value="0.007">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="symmetry_se">Symmetry SE</label>
+                                <input type="number" step="any" class="form-control" id="symmetry_se" name="symmetry_se" required placeholder="Enter symmetry SE (e.g., 0.031)" value="0.031">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fractal_dimension_se">Fractal Dimension SE</label>
+                                <input type="number" step="any" class="form-control" id="fractal_dimension_se" name="fractal_dimension_se" required placeholder="Enter fractal dimension SE (e.g., 0.006)" value="0.006">
+                            </div>
+
+                            <!-- Worst fields -->
+                            <div class="form-group">
+                                <label for="radius_worst">Radius Worst</label>
+                                <input type="number" step="any" class="form-control" id="radius_worst" name="radius_worst" required placeholder="Enter radius worst (e.g., 18.3)" value="18.3">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="texture_worst">Texture Worst</label>
+                                <input type="number" step="any" class="form-control" id="texture_worst" name="texture_worst" required placeholder="Enter texture worst (e.g., 26.5)" value="26.5">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="perimeter_worst">Perimeter Worst</label>
+                                <input type="number" step="any" class="form-control" id="perimeter_worst" name="perimeter_worst" required placeholder="Enter perimeter worst (e.g., 100)" value="100">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="area_worst">Area Worst</label>
+                                <input type="number" step="any" class="form-control" id="area_worst" name="area_worst" required placeholder="Enter area worst (e.g., 800)" value="800">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="smoothness_worst">Smoothness Worst</label>
+                                <input type="number" step="any" class="form-control" id="smoothness_worst" name="smoothness_worst" required placeholder="Enter smoothness worst (e.g., 0.135)" value="0.135">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="compactness_worst">Compactness Worst</label>
+                                <input type="number" step="any" class="form-control" id="compactness_worst" name="compactness_worst" required placeholder="Enter compactness worst (e.g., 0.243)" value="0.243">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="concavity_worst">Concavity Worst</label>
+                                <input type="number" step="any" class="form-control" id="concavity_worst" name="concavity_worst" required placeholder="Enter concavity worst (e.g., 0.211)" value="0.211">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="concave_points_worst">Concave Points Worst</label>
+                                <input type="number" step="any" class="form-control" id="concave_points_worst" name="concave_points_worst" required placeholder="Enter concave points worst (e.g., 0.051)" value="0.051">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="symmetry_worst">Symmetry Worst</label>
+                                <input type="number" step="any" class="form-control" id="symmetry_worst" name="symmetry_worst" required placeholder="Enter symmetry worst (e.g., 0.232)" value="0.232">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fractal_dimension_worst">Fractal Dimension Worst</label>
+                                <input type="number" step="any" class="form-control" id="fractal_dimension_worst" name="fractal_dimension_worst" required placeholder="Enter fractal dimension worst (e.g., 0.078)" value="0.078">
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-primary btn-block">Predict Breast Cancer</button>
+                        </form>
+                    </div>
+                     <!-- Prediction Result -->
+                     {% if prediction_result %}
+                     <div class="card-footer text-center mt-4">
+                         <h5 class="text-success">{{ prediction_result }}</h5>
+                     </div>
+                     {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+ 
+
+
+    
+ {% endblock %}
